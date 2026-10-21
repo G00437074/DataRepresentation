@@ -18,7 +18,7 @@ function Create() {
 
     }
 
-    // Render the form for adding a new movie
+    // Render the form for adding a new movie, including input fields for title, year, and poster, and a submit button
     return (
         <div>
             <h1>Hello World! from Create component</h1>
@@ -42,7 +42,7 @@ function Create() {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Add Movie Year: </label>
+                    <label>Add Movie Poster: </label>
                     <textarea type="text"
                         className="form-control"
                         value={poster}
@@ -56,4 +56,5 @@ function Create() {
     )
 }
 
+// Export the Create component for use in other files
 export default Create
