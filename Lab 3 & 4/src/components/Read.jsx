@@ -13,10 +13,10 @@ function Read() {
 
     // Fetch movie data when the component loads
     useEffect(() => {
-        axios.get('https://data-rep-mern-application.github.io/dataserver/movies.json')
+        axios.get('http://localhost:4000/api/movies')
             .then((response) => {
                 // Store the movie data in the state
-                setMovies(response.data.myArray);
+                setMovies(response.data.movies);
             })
             .catch((error) => {
                 // Display an error if the request fails

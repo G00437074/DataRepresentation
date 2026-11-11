@@ -2,6 +2,7 @@
 
 // Import useState hook from React
 import { useState } from "react";
+import axios from "axios";
 
 // Define the Create component
 function Create() {
@@ -11,10 +12,24 @@ function Create() {
     const [year, setYear] = useState('');
     const [poster, setPoster] = useState('');
 
+
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(title, year, poster);
+
+        // Create a movie object with the title, year, and poster
+        const movie = {
+            title: title,
+            year: year,
+            poster: poster
+        };
+
+        // Send a POST request to the server to add the new movie
+        axios.post('http://localhost:4000/api/movies', movie)
+
+            .then((res) => { console.log(res.data) })
+            .catch((err) => { console.log(err.data) });
 
     }
 
