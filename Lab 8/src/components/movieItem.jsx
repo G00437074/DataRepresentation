@@ -1,38 +1,73 @@
+// Imports the Card component from React Bootstrap to display movie information
 import Card from 'react-bootstrap/Card';
+
+// Imports the Button component from React Bootstrap
 import Button from 'react-bootstrap/Button';
+
+// Imports Axios to make HTTP requests to the server
 import axios from 'axios';
 
-// Import the axios library for making HTTP requests
+// Creates the MovieItem component and receives movie information through props
 const MovieItem = (props) => {
-    // Function to handle the deletion of a movie
+
+    // Function that handles deleting a movie when the button is clicked
     const handleDelete = (e) => {
-        // Prevent the default form submission behavior
+
+        // Prevents the default form submission behaviour
         e.preventDefault();
+
+        // Displays a message in the console when the delete action starts
         console.log("Delete movie");
 
-        // Send a DELETE request to the server to delete the movie with the specified ID
-        axios.delete('http://localhost:4000/api/movie/' +props.mymovie._id)
+        // Sends a DELETE request to the server using the movie's ID
+        axios.delete('http://localhost:4000/api/movie/' + props.mymovie._id)
             .then(() => {
+
+                // Displays a message when the movie has been successfully deleted
                 console.log("movie deleted");
-                props.Reload(); // Refresh the movie list after deletion
+
+                // Calls the Reload function to refresh the movie list
+                // This removes the deleted movie from the displayed list
+                props.Reload();
             })
-            // Catch any errors that occur during the deletion process and log them to the console
-            .catch(()=>{
+
+            // Handles any errors that occur while deleting the movie
+            .catch(() => {
                 console.log("Error deleting movie");
             });
     };
 
+    // Displays the movie information on the page
     return (
         <div>
+
+            {/* Creates a Bootstrap card to display the movie */}
             <Card className="text-center">
+
                 <Card.Body>
+
+                    {/* Displays the movie title from the database */}
                     <Card.Title>{props.mymovie.title}</Card.Title>
+
+                    {/* Displays the movie poster using its image URL */}
                     <img src={props.mymovie.poster} />
+
                 </Card.Body>
-                <Card.Footer className="text-muted">{props.mymovie.year}</Card.Footer>
-                <Button variant="danger" onClick={handleDelete}>Delete</Button>
+
+                {/* Displays the movie release year in the card footer */}
+                <Card.Footer className="text-muted">
+                    {props.mymovie.year}
+                </Card.Footer>
+
+                {/* Delete button that calls handleDelete when clicked */}
+                <Button variant="danger" onClick={handleDelete}>
+                    Delete
+                </Button>
+
             </Card>
         </div>
     );
 }
+
+// Makes the MovieItem component available to other files
 export default MovieItem;
